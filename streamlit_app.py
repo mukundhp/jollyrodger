@@ -22,9 +22,9 @@ with st.sidebar:
     x0 = st.number_input("x0 (radial) [m]", -5000, 5000, 3000)
     y0 = st.number_input("y0 (along‑track) [m]", -50000, 50000, -8000)
     z0 = st.number_input("z0 (cross‑track) [m]", -5000, 5000, 500)
-    vx0 = st.number_input("vx0 [m/s]", -5, 5, 0)
-    vy0 = st.number_input("vy0 [m/s]", -5, 5, -0.02)
-    vz0 = st.number_input("vz0 [m/s]", -5, 5, 0)
+    vx0 = st.number_input("vx0 [m/s]", -5.0, 5.0, 0.0, step=0.01)
+    vy0 = st.number_input("vy0 [m/s]", -5.0, 5.0, -0.02, step=0.01)
+    vz0 = st.number_input("vz0 [m/s]", -5.0, 5.0, 0.0, step=0.01)
 
     st.subheader("Run Settings")
     sim_minutes = st.slider("Simulation duration [min]", 1, 60, 15)
