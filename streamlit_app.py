@@ -85,16 +85,20 @@ if st.button("Run Simulation", type="primary"):
     with col2:
         st.plotly_chart(plot_traj_3d(hist), use_container_width=True)
 
-    # Pretty summary
-    st.subheader("Outcome")
+   # Pretty summary
+st.subheader("Outcome")
 st.write(f"**{scores['outcome']}**")
 
+# Safely format detection time
+detection_str = f"{scores['detection_time_s']:.1f} s" if scores['detection_time_s'] is not None else "No detection"
+closest_str = f"{scores['closest_approach_m']:.1f} m" if scores['closest_approach_m'] is not None else "—"
+time_inside_str = f"{scores['time_inside_keepout_s']:.1f} s" if scores['time_inside_keepout_s'] is not None else "—"
+blue_dv_str = f"{scores['blue_total_dv_mps']:.3f} m/s" if scores['blue_total_dv_mps'] is not None else "—"
+threat_dv_str = f"{scores['threat_total_dv_mps']:.3f} m/s" if scores['threat_total_dv_mps'] is not None else "—"
+
 st.write(
-    "Detection time: " + fmt_num(scores["detection_time_s"]) + " s  ·  "
-    "Closest approach: " + fmt_num(scores["closest_approach_m"]) + " m  ·  "
-    "Time inside KOZ: " + fmt_num(scores["time_inside_keepout_s"]) + " s  ·  "
-    "Blue ΔV: " + fmt_num(scores["blue_total_dv_mps"], 3) + " m/s  ·  "
-    "Threat ΔV: " + fmt_num(scores["threat_total_dv_mps"], 3) + " m/s"
+    f"Detection time: {detection_str}  ·  "
+    f"Closest approach: {closest_str}  ·  "
+    f"Time inside KOZ: {time_inside_str}  ·  "
+    f"Blue ΔV: {blue_dv_str}  ·  Threat ΔV: {threat_dv_str}"
 )
-else:
-    st.info("Configure parameters on the left, then click **Run Simulation**.")
