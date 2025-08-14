@@ -1,6 +1,6 @@
 # Orbital Range — SIL MVP
 
-A minimal, no‑CUI, single‑file deployable MVP for a software‑in‑the‑loop proximity ops demo using Hill‑frame (Clohessy–Wiltshire) dynamics. Blue is the chief at the origin; Threat is the deputy in relative coordinates.
+A minimal, single‑file deployable MVP for a software‑in‑the‑loop proximity ops demo using Hill‑frame (Clohessy–Wiltshire) dynamics. Blue is the chief at the origin; Threat is the deputy in relative coordinates.
 
 ## Quickstart
 1. **Clone** this repo.
