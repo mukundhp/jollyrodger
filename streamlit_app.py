@@ -1,5 +1,14 @@
 import streamlit as st
 import numpy as np
+def fmt_num(x, decimals=1, none_text="—"):
+    if x is None:
+        return none_text
+    try:
+        if isinstance(x, float) and not np.isfinite(x):
+            return none_text
+        return f"{x:.{decimals}f}"
+    except Exception:
+        return none_text
 from engine.cw import simulate_relative_motion
 from engine.policies import ThreatApproach, KeepOutPolicy, LLMHeuristicPolicy
 from engine.scoring import score_run
@@ -78,12 +87,14 @@ if st.button("Run Simulation", type="primary"):
 
     # Pretty summary
     st.subheader("Outcome")
-    st.write(f"**{scores['outcome']}**")
-    st.write(
-        f"Detection time: {scores['detection_time_s']:.1f} s  ·  "
-        f"Closest approach: {scores['closest_approach_m']:.1f} m  ·  "
-        f"Time inside KOZ: {scores['time_inside_keepout_s']:.1f} s  ·  "
-        f"Blue ΔV: {scores['blue_total_dv_mps']:.3f} m/s  ·  Threat ΔV: {scores['threat_total_dv_mps']:.3f} m/s"
-    )
+st.write(f"**{scores['outcome']}**")
+
+st.write(
+    "Detection time: " + fmt_num(scores["detection_time_s"]) + " s  ·  "
+    "Closest approach: " + fmt_num(scores["closest_approach_m"]) + " m  ·  "
+    "Time inside KOZ: " + fmt_num(scores["time_inside_keepout_s"]) + " s  ·  "
+    "Blue ΔV: " + fmt_num(scores["blue_total_dv_mps"], 3) + " m/s  ·  "
+    "Threat ΔV: " + fmt_num(scores["threat_total_dv_mps"], 3) + " m/s"
+)
 else:
     st.info("Configure parameters on the left, then click **Run Simulation**.")
